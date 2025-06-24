@@ -1,0 +1,222 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #1e293b 0%, #e11d48 100%);
+  min-height: 100vh;
+  color: #fff;
+}
+
+header {
+  background: #0f172a;
+  padding: 24px 0;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(30,41,59,0.2);
+}
+header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  color: #e11d48;
+  margin: 0;
+}
+header p {
+  color: #f1f5f9;
+  margin: 8px 0 0 0;
+  font-size: 1.1rem;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  padding: 40px 4vw;
+}
+
+#map {
+  width: 480px;
+  height: 480px;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(30,41,59,0.3);
+  margin-bottom: 24px;
+}
+
+.section {
+  background: rgba(15,23,42,0.85);
+  border-radius: 18px;
+  padding: 32px 28px;
+  min-width: 320px;
+  max-width: 420px;
+  box-shadow: 0 4px 32px rgba(225,29,72,0.15);
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  color: #e11d48;
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.disaster-card, .report-card {
+  background: #fff1f2;
+  color: #1e293b;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(225,29,72,0.08);
+  font-size: 1.05rem;
+}
+.severity {
+  color: #e11d48;
+  font-weight: bold;
+}
+
+#reportForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+#reportForm input, #reportForm textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e11d48;
+  font-size: 1rem;
+  background: #fff;
+  color: #1e293b;
+}
+#reportForm button {
+  background: linear-gradient(90deg, #e11d48 0%, #f43f5e 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(225,29,72,0.15);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+}
+#reportForm button:hover {
+  background: linear-gradient(90deg, #f43f5e 0%, #e11d48 100%);
+  transform: scale(1.04);
+  box-shadow: 0 4px 16px rgba(225,29,72,0.25);
+}
+#reportForm button:active {
+  background: #e11d48;
+  transform: scale(0.98);
+}
+
+#disaster-feed, #report-feed {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-top: 12px;
+}
+
+@media (max-width: 1100px) {
+  .main { flex-direction: column; align-items: center; }
+  #map { width: 98vw; height: 320px; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 18px 6px; min-width: unset; max-width: 98vw; }
+  #map { height: 220px; }
+}
+
+.header-anim {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.pulse-anim {
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.12); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.loader {
+  display: block;
+  margin: 0 auto 18px auto;
+  width: 36px;
+  height: 36px;
+  border: 4px solid #fff1f2;
+  border-top: 4px solid #e11d48;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#map-loader, #disaster-feed-loader, #report-feed-loader, #report-submit-loader {
+  display: none;
+}
+
+.disaster-anim-icon {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+.disaster-pulse {
+  position: absolute;
+  top: 0; left: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(225,29,72,0.25);
+  animation: markerPulse 1.2s infinite;
+  z-index: 1;
+}
+@keyframes markerPulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.7); opacity: 0.1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+.leaflet-interactive.report-anim-marker {
+  animation: reportPulse 1.2s infinite;
+  stroke-width: 2;
+}
+@keyframes reportPulse {
+  0% { stroke: #e11d48; }
+  50% { stroke: #f43f5e; }
+  100% { stroke: #e11d48; }
+}
+
+/* Loader: visible when display:block */
+.loader {
+  display: block !important;
+}
+
+.location-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+#findCoordsBtn {
+  background: linear-gradient(90deg, #60a5fa 0%, #e11d48 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.12);
+}
+#findCoordsBtn:hover {
+  background: linear-gradient(90deg, #e11d48 0%, #60a5fa 100%);
+  transform: scale(1.04);
+}
+.geocode-status {
+  min-height: 18px;
+  font-size: 0.98rem;
+  color: #fbbf24;
+  margin-bottom: 4px;
+  margin-top: -6px;
+} 

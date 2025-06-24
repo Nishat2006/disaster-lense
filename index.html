@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Lens - Real-Time Disaster Response</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+  <header>
+    <div class="header-anim">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="pulse-anim">
+        <circle cx="24" cy="24" r="20" fill="#e11d48" opacity="0.2"/>
+        <circle cx="24" cy="24" r="12" fill="#e11d48"/>
+        <path d="M18 24l4 4 8-8" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Disaster Lens</h1>
+    </div>
+    <p>Real-time disaster tracking and reporting for people in need</p>
+  </header>
+  <div class="main">
+    <div>
+      <div id="map-loader" class="loader"></div>
+      <div id="map"></div>
+    </div>
+    <div class="section">
+      <h2>Live Disasters</h2>
+      <div id="disaster-feed-loader" class="loader"></div>
+      <div id="disaster-feed"></div>
+    </div>
+    <div class="section">
+      <h2>Community Reports</h2>
+      <div id="report-feed-loader" class="loader"></div>
+      <div id="report-feed"></div>
+      <form id="reportForm">
+        <input name="name" type="text" placeholder="Your Name (optional)">
+        <textarea name="description" placeholder="Describe what you see or need" required></textarea>
+        <div class="location-row">
+          <input name="location" id="locationInput" type="text" placeholder="Location (city, area, etc.)">
+          <button type="button" id="findCoordsBtn">Find Coordinates</button>
+        </div>
+        <div id="geocodeStatus" class="geocode-status"></div>
+        <input name="lat" type="text" placeholder="Latitude (click map or use Find Coordinates)">
+        <input name="lng" type="text" placeholder="Longitude (click map or use Find Coordinates)">
+        <button type="submit">Submit Report</button>
+        <div id="report-submit-loader" class="loader" style="display:none;"></div>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html> 
